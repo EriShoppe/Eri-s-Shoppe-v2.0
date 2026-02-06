@@ -588,8 +588,8 @@ const LandingPage = () => {
                     rows={4}
                   />
                 </div>
-                <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800">
-                  Send Message
+                <Button type="submit" disabled={submittingForm} className="w-full bg-slate-900 hover:bg-slate-800">
+                  {submittingForm ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>
