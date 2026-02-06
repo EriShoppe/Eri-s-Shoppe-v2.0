@@ -303,7 +303,7 @@ const LandingPage = () => {
                   </ul>
                 </div>
 
-                <Button onClick={() => scrollToSection('contact')} className="w-full bg-slate-900 hover:bg-slate-800">
+                <Button onClick={() => setBookingModalOpen(true)} className="w-full bg-slate-900 hover:bg-slate-800">
                   Book Self-Drive
                 </Button>
               </CardContent>
