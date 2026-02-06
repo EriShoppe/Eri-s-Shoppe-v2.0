@@ -1,4 +1,5 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Header
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -11,6 +12,7 @@ import uuid
 from datetime import datetime, timezone, timedelta
 from models import Booking, BookingCreate, ContactFormEntry, ContactFormSubmit
 from email_service import email_service
+from auth import authenticate_admin, create_access_token, verify_token
 
 
 ROOT_DIR = Path(__file__).parent
@@ -27,6 +29,19 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Security
+security = HTTPBearer()
+
+
+# Auth dependency
+async def get_current_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Verify admin token"""
+    token = credentials.credentials
+    payload = verify_token(token)
+    if payload is None:
+        raise HTTPException(status_code=401, detail="Invalid authentication credentials")
+    return payload
+
 
 # Define Models
 class StatusCheck(BaseModel):
@@ -38,6 +53,21 @@ class StatusCheck(BaseModel):
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+
+
+# Auth Models
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class BookingStatusUpdate(BaseModel):
+    status: str  # pending, confirmed, cancelled, completed
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
@@ -141,8 +171,8 @@ async def get_booking_availability(start_date: str, end_date: str):
 
 
 @api_router.get("/bookings", response_model=List[Booking])
-async def get_all_bookings():
-    """Get all bookings (admin endpoint)"""
+async def get_all_bookings(admin: dict = Depends(get_current_admin)):
+    """Get all bookings (admin endpoint - protected)"""
     try:
         bookings = await db.bookings.find({}, {"_id": 0}).to_list(1000)
         
@@ -191,8 +221,8 @@ async def submit_contact_form(contact_input: ContactFormSubmit):
 
 
 @api_router.get("/contact", response_model=List[ContactFormEntry])
-async def get_contact_forms():
-    """Get all contact form submissions (admin endpoint)"""
+async def get_contact_forms(admin: dict = Depends(get_current_admin)):
+    """Get all contact form submissions (admin endpoint - protected)"""
     try:
         contacts = await db.contact_forms.find({}, {"_id": 0}).to_list(1000)
         
@@ -204,6 +234,74 @@ async def get_contact_forms():
         return contacts
     except Exception as e:
         logger.error(f"Error getting contact forms: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# Admin Authentication Endpoints
+@api_router.post("/admin/login", response_model=TokenResponse)
+async def admin_login(login_data: AdminLogin):
+    """Admin login endpoint"""
+    if not authenticate_admin(login_data.username, login_data.password):
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    access_token = create_access_token(data={"sub": login_data.username, "role": "admin"})
+    return {"access_token": access_token, "token_type": "bearer"}
+
+
+@api_router.get("/admin/verify")
+async def verify_admin(admin: dict = Depends(get_current_admin)):
+    """Verify admin token"""
+    return {"valid": True, "username": admin.get("sub")}
+
+
+# Admin Booking Management
+@api_router.patch("/admin/bookings/{booking_id}/status")
+async def update_booking_status(
+    booking_id: str,
+    status_update: BookingStatusUpdate,
+    admin: dict = Depends(get_current_admin)
+):
+    """Update booking status (admin only)"""
+    try:
+        valid_statuses = ["pending", "confirmed", "cancelled", "completed"]
+        if status_update.status not in valid_statuses:
+            raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {valid_statuses}")
+        
+        result = await db.bookings.update_one(
+            {"id": booking_id},
+            {"$set": {"status": status_update.status}}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Booking not found")
+        
+        return {"success": True, "message": f"Booking status updated to {status_update.status}"}
+    except Exception as e:
+        logger.error(f"Error updating booking status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@api_router.get("/admin/stats")
+async def get_admin_stats(admin: dict = Depends(get_current_admin)):
+    """Get dashboard statistics"""
+    try:
+        total_bookings = await db.bookings.count_documents({})
+        pending_bookings = await db.bookings.count_documents({"status": "pending"})
+        confirmed_bookings = await db.bookings.count_documents({"status": "confirmed"})
+        completed_bookings = await db.bookings.count_documents({"status": "completed"})
+        total_contacts = await db.contact_forms.count_documents({})
+        new_contacts = await db.contact_forms.count_documents({"status": "new"})
+        
+        return {
+            "total_bookings": total_bookings,
+            "pending_bookings": pending_bookings,
+            "confirmed_bookings": confirmed_bookings,
+            "completed_bookings": completed_bookings,
+            "total_contacts": total_contacts,
+            "new_contacts": new_contacts
+        }
+    except Exception as e:
+        logger.error(f"Error getting stats: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
