@@ -33,8 +33,12 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    verifyAuth();
-    fetchData();
+    const initDashboard = async () => {
+      await verifyAuth();
+      await fetchData();
+    };
+    initDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const verifyAuth = async () => {
