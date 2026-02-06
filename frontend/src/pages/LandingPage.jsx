@@ -56,21 +56,46 @@ const LandingPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Mock form submission
+    // Validate form
     if (!formData.name || !formData.email || !formData.service) {
       toast.error('Please fill in all required fields');
       return;
     }
-    toast.success('Thank you! We will contact you shortly.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+
+    setSubmittingForm(true);
+    try {
+      await axios.post(`${API}/contact`, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || null,
+        service: formData.service,
+        message: formData.message || null
+      });
+
+      toast.success('Thank you! We will contact you shortly.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error('Failed to submit form. Please try again.');
+    } finally {
+      setSubmittingForm(false);
+    }
+  };
+
+  const handleBookNowClick = (serviceType = null) => {
+    if (serviceType && (serviceType === 'car-with-driver' || serviceType === 'car-self-drive')) {
+      setBookingModalOpen(true);
+    } else {
+      scrollToSection('contact');
+    }
   };
 
   return (
