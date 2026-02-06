@@ -1,0 +1,51 @@
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom button hover effects */
+button {
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Card hover effects */
+.hover\:shadow-lg {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Image hover effects */
+img {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+}
+
+/* Input focus effects */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #0f172a;
+    transition: ring 0.3s ease;
+}
+
+/* Navigation smooth transitions */
+nav button {
+    transition: color 0.3s ease;
+}
+
+/* Card border transitions */
+.border-2 {
+    transition: border-color 0.3s ease;
+}
