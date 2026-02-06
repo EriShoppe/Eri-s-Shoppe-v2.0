@@ -570,7 +570,7 @@ const LandingPage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Phone</h4>
-                      <p className="text-slate-300">+63 XXX XXX XXXX</p>
+                      <p className="text-slate-300">0909 967 4035</p>
                       <p className="text-sm text-slate-400 mt-1">Available 24/7 for bookings</p>
                     </div>
                   </div>
@@ -581,7 +581,7 @@ const LandingPage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">Email</h4>
-                      <p className="text-slate-300">info@erisshoppe.com</p>
+                      <p className="text-slate-300">rensengamboa@gmail.com</p>
                       <p className="text-sm text-slate-400 mt-1">We'll respond within 24 hours</p>
                     </div>
                   </div>
@@ -592,7 +592,7 @@ const LandingPage = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1">WhatsApp</h4>
-                      <p className="text-slate-300">+63 XXX XXX XXXX</p>
+                      <p className="text-slate-300">0909 967 4035</p>
                       <p className="text-sm text-slate-400 mt-1">Quick response via WhatsApp</p>
                     </div>
                   </div>
