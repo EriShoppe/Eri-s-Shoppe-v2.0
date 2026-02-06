@@ -5,6 +5,8 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
 import { images } from '../config/images';
+import CarBookingModal from '../components/CarBookingModal';
+import axios from 'axios';
 import {
   Car,
   Monitor,
@@ -24,8 +26,13 @@ import {
   Star
 } from 'lucide-react';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
+
 const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [submittingForm, setSubmittingForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
