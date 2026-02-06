@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { toast } from 'sonner';
+import { images } from '../config/images';
 import {
   Car,
   Monitor,
@@ -160,8 +161,8 @@ const LandingPage = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1758518729371-5ee28c4ddf60"
-                alt="Professional Service"
+                src={images.hero.main}
+                alt={images.hero.alt}
                 className="rounded-2xl shadow-2xl w-full h-[500px] object-cover"
               />
             </div>
@@ -285,8 +286,8 @@ const LandingPage = () => {
 
           <div className="mt-12">
             <img
-              src="https://images.unsplash.com/photo-1529369623266-f5264b696110"
-              alt="Car Services"
+              src={images.carServices.featured}
+              alt={images.carServices.alt}
               className="rounded-2xl shadow-lg w-full h-[400px] object-cover"
             />
           </div>
@@ -409,8 +410,8 @@ const LandingPage = () => {
 
           <div className="mt-12">
             <img
-              src="https://images.unsplash.com/photo-1591238372338-22d30c883a86"
-              alt="Computer Services"
+              src={images.computerServices.featured}
+              alt={images.computerServices.alt}
               className="rounded-2xl shadow-lg w-full h-[400px] object-cover"
             />
           </div>
@@ -423,8 +424,8 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="https://images.pexels.com/photos/8297652/pexels-photo-8297652.jpeg"
-                alt="Consulting Services"
+                src={images.consulting.featured}
+                alt={images.consulting.alt}
                 className="rounded-2xl shadow-2xl w-full h-[500px] object-cover"
               />
             </div>
