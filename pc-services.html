@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC Services Highlights - Eri's Shoppe</title>
+    
+    <!-- Favicon - Custom Icon in Browser Tab -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💻%3C/text%3E%3C/svg%3E">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -29,9 +33,46 @@
             font-size: 12px;
             font-weight: bold;
         }
+        .gallery-item {
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item:hover::after {
+            content: 'Click to view full album';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .hidden-item {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Disable Right Click & F12 -->
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
     <!-- Back Button -->
     <div class="fixed top-4 left-4 z-50">
         <a href="index.html" class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg shadow-lg font-semibold transition-all">
@@ -63,7 +104,7 @@
                          alt="PC Build Photo 1" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 59)
+                        👆 Replace image URL above (line 95)
                     </p>
                 </div>
                 <div>
@@ -131,7 +172,7 @@
                          alt="PC Repair Photo 2" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 117)
+                        👆 Replace image URL above (line 162)
                     </p>
                 </div>
             </div>
@@ -147,7 +188,7 @@
                          alt="Software Services Photo 3" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 140)
+                        👆 Replace image URL above (line 185)
                     </p>
                 </div>
                 <div>
@@ -179,59 +220,173 @@
             </div>
         </div>
 
-        <!-- ==================== PHOTO GALLERY SECTION ==================== -->
+        <!-- ==================== PHOTO GALLERY SECTION WITH SEARCH ==================== -->
         <div class="edit-section mb-12">
-            <span class="edit-label">📸 PHOTO GALLERY - Add More Photos Here</span>
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Our Work Gallery</h2>
+            <span class="edit-label">📸 PHOTO GALLERY WITH SEARCH - Add More Photos Here</span>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Our Work Gallery</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 👇 PHOTO 1 - REPLACE URL -->
-                <div class="relative group">
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <div class="relative">
+                    <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search project or location..." 
+                        class="w-full pl-12 pr-4 py-4 border-2 border-purple-300 rounded-lg text-lg focus:border-purple-600 focus:outline-none"
+                        onkeyup="filterGallery()">
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">Type project name or location to filter results</p>
+            </div>
+            
+            <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- 
+                ============================================================
+                👇 PHOTO 1 - EDIT EVERYTHING BELOW:
+                - Replace image URL (src="...")
+                - Replace Google Photos album link (onclick="...")
+                - Edit project name (data-project="...")
+                - Edit location (data-location="...")
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Gaming PC Build" 
+                     data-location="Manila"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_1', '_blank')">
                     <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086" 
                          alt="Gallery Photo 1" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 1 (line 186)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Gaming PC Build</p>
+                        <p class="text-gray-300 text-sm">📍 Manila</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 2 - REPLACE URL -->
-                <div class="relative group">
+                <!-- 
+                ============================================================
+                👇 PHOTO 2 - EDIT EVERYTHING BELOW
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Office Workstation" 
+                     data-location="Quezon City"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_2', '_blank')">
                     <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5" 
                          alt="Gallery Photo 2" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 2 (line 194)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Office Workstation</p>
+                        <p class="text-gray-300 text-sm">📍 Quezon City</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 3 - REPLACE URL -->
-                <div class="relative group">
+                <!-- 
+                ============================================================
+                👇 PHOTO 3 - EDIT EVERYTHING BELOW
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Laptop Repair" 
+                     data-location="Makati"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_3', '_blank')">
                     <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c" 
                          alt="Gallery Photo 3" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 3 (line 202)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Laptop Repair</p>
+                        <p class="text-gray-300 text-sm">📍 Makati</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 4 - REPLACE URL -->
-                <div class="relative group">
+                <!-- 
+                ============================================================
+                👇 PHOTO 4 - EDIT EVERYTHING BELOW
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Custom RGB Setup" 
+                     data-location="Pasig"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_4', '_blank')">
                     <img src="https://images.unsplash.com/photo-1593510987459-04c4fe7ef46f" 
                          alt="Gallery Photo 4" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 4 (line 210)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Custom RGB Setup</p>
+                        <p class="text-gray-300 text-sm">📍 Pasig</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 5 - REPLACE URL -->
-                <div class="relative group">
+                <!-- 
+                ============================================================
+                👇 PHOTO 5 - EDIT EVERYTHING BELOW
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Data Recovery Service" 
+                     data-location="Taguig"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_5', '_blank')">
                     <img src="https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae" 
                          alt="Gallery Photo 5" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 5 (line 218)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Data Recovery Service</p>
+                        <p class="text-gray-300 text-sm">📍 Taguig</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 6 - REPLACE URL -->
-                <div class="relative group">
+                <!-- 
+                ============================================================
+                👇 PHOTO 6 - EDIT EVERYTHING BELOW
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Server Maintenance" 
+                     data-location="BGC"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_6', '_blank')">
                     <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8" 
                          alt="Gallery Photo 6" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 6 (line 226)</p>
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Server Maintenance</p>
+                        <p class="text-gray-300 text-sm">📍 BGC</p>
+                    </div>
                 </div>
+
+                <!-- 
+                ============================================================
+                👇 ADD MORE PHOTOS HERE - Copy the template below and paste multiple times
+                ============================================================
+                
+                <div class="gallery-item relative group" 
+                     data-project="Your Project Name" 
+                     data-location="Your Location"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK', '_blank')">
+                    <img src="YOUR_IMAGE_URL_HERE" 
+                         alt="Your Photo Description" 
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Your Project Name</p>
+                        <p class="text-gray-300 text-sm">📍 Your Location</p>
+                    </div>
+                </div>
+                
+                ============================================================
+                -->
+
+            </div>
+
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xl text-gray-600">No projects found matching your search</p>
+                <button onclick="clearSearch()" class="mt-4 text-purple-600 hover:text-purple-700 font-semibold">
+                    Clear Search
+                </button>
             </div>
         </div>
 
@@ -267,5 +422,39 @@
             <a href="index.html" class="text-purple-400 hover:text-purple-300">← Back to Home</a>
         </div>
     </footer>
+
+    <!-- Search & Filter Script -->
+    <script>
+        function filterGallery() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            galleryItems.forEach(item => {
+                const project = item.getAttribute('data-project').toLowerCase();
+                const location = item.getAttribute('data-location').toLowerCase();
+                
+                if (project.includes(searchInput) || location.includes(searchInput)) {
+                    item.classList.remove('hidden-item');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden-item');
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && searchInput !== '') {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            filterGallery();
+        }
+    </script>
 </body>
 </html>
