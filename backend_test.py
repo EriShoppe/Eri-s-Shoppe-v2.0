@@ -8,7 +8,7 @@ import uuid
 class ErisShoppeAPITester:
     def __init__(self):
         # Use public endpoint from frontend env
-        self.base_url = "https://multi-service-pro.preview.emergentagent.com/api"
+        self.base_url = "https://pc-softwares-shop.preview.emergentagent.com/api"
         self.tests_run = 0
         self.tests_passed = 0
 
