@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Services Highlights - Eri's Shoppe</title>
+    
+    <!-- Favicon - Custom Icon in Browser Tab -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        /* HIGHLIGHT: Easy-to-spot sections for editing */
         .edit-section {
             border: 3px dashed #3b82f6;
             background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
@@ -29,9 +32,44 @@
             font-size: 12px;
             font-weight: bold;
         }
+        .gallery-item {
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item:hover::after {
+            content: 'Click to view full album';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .hidden-item {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Disable Right Click & F12 -->
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
     <!-- Back Button -->
     <div class="fixed top-4 left-4 z-50">
         <a href="index.html" class="inline-flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg shadow-lg font-semibold transition-all">
@@ -55,40 +93,37 @@
         
         <!-- ==================== EDIT SECTION 1 ==================== -->
         <div class="edit-section mb-12">
-            <span class="edit-label">📝 EDIT PHOTO 1</span>
+            <span class="edit-label">God Centered Journey</span>
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <!-- 👇 REPLACE THIS IMAGE URL WITH YOUR PHOTO -->
-                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d" 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOc029RebOs3FRdu9rIJWP6mHBDtJYQ9u1ICbVCMSIdqJ5vU6YmZTH116fgCG26s2H42YDLrk7yw9vRssbUF2aRUp_kXU7xZbZMOFGDBG2Cu0r9_WdNO9Iv_XYf3qGa0PdDHWsi7tocLnh57nNFiNjwRw=w1060-h602-s-no-gm?authuser=0" 
                          alt="Car Service Photo 1" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 59)
+                        For hire, driver and transport
                     </p>
                 </div>
                 <div>
-                    <!-- 👇 EDIT THIS TITLE -->
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Professional With-Driver Service</h2>
-                    
-                    <!-- 👇 EDIT THIS DESCRIPTION -->
                     <p class="text-gray-700 text-lg mb-4">
-                        Add your description here. Tell customers about your with-driver service, 
-                        what makes it special, the quality of your drivers, safety features, etc.
+                        I offer a reliable and professional with-driver car service designed for clients who value safety, punctuality, and peace of mind. Whether for daily transport, personal errands, or special occasions, I provide a calm and respectful driving experience focused on your comfort and schedule. I drive with care, discipline, and attention to detail, ensuring every trip is smooth, secure, and stress free. My goal is not just to take you from point A to point B, but to provide dependable service you can trust every time you ride.
                     </p>
-                    
-                    <!-- 👇 EDIT THESE BULLET POINTS -->
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 1</span>
+                            <span class="text-gray-700">Experienced and courteous driver with a strong focus on road safety and defensive driving</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 2</span>
+                            <span class="text-gray-700">Clean and well maintained vehicle for a comfortable and pleasant journey</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 3</span>
+                            <span class="text-gray-700">On time service with flexible scheduling based on your needs</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-600 text-xl">✓</span>
+                            <span class="text-gray-700">"For God has not given us a spirit of fear, but of power, love, and a sound mind." 2 Timothy 1:7</span>
                         </li>
                     </ul>
                 </div>
@@ -97,41 +132,34 @@
 
         <!-- ==================== EDIT SECTION 2 ==================== -->
         <div class="edit-section mb-12">
-            <span class="edit-label">📝 EDIT PHOTO 2</span>
+            <span class="edit-label">Your Own Journey</span>
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="order-2 md:order-1">
-                    <!-- 👇 EDIT THIS TITLE -->
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Self-Drive Freedom</h2>
-                    
-                    <!-- 👇 EDIT THIS DESCRIPTION -->
                     <p class="text-gray-700 text-lg mb-4">
-                        Add your description here. Highlight the benefits of self-drive, 
-                        car condition, insurance coverage, fuel policy, etc.
+                        Enjoy the freedom and privacy of driving on your own terms with my self drive car service. This option is perfect for clients who want full control of their schedule and route without the presence of a driver. The vehicle is well maintained, regularly checked, and ready for safe everyday use or longer trips. Clear terms, honest fuel policy, and responsible vehicle care ensure a smooth and worry free self drive experience from pickup to return.
                     </p>
-                    
-                    <!-- 👇 EDIT THESE BULLET POINTS -->
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 1</span>
+                            <span class="text-gray-700">Well maintained and road ready vehicle for safe and comfortable driving</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 2</span>
+                            <span class="text-gray-700">Clear fuel and usage policy with no hidden charges</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 3</span>
+                            <span class="text-gray-700">Basic insurance coverage and proper documentation for peace of mind</span>
                         </li>
                     </ul>
                 </div>
                 <div class="order-1 md:order-2">
-                    <!-- 👇 REPLACE THIS IMAGE URL WITH YOUR PHOTO -->
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7" 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPzAC1lWi6uA446tA0xyBDSDITEno-YyQZJBuTYHvTfXrvsUQ4Y3a8UFDvYJalatsNhJXnmSLzXBRMBDjZ94cxLHJvICT4YT16Gk8qvT3_sXfYLpVleuLaT9DNSzguS10bqe5spyuH3s_x5mAaYIOU-8Q=w452-h602-s-no-gm?authuser=0" 
                          alt="Car Service Photo 2" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 117)
+                        Enjoy Your Custom Journey
                     </p>
                 </div>
             </div>
@@ -139,99 +167,149 @@
 
         <!-- ==================== EDIT SECTION 3 ==================== -->
         <div class="edit-section mb-12">
-            <span class="edit-label">📝 EDIT PHOTO 3</span>
+            <span class="edit-label">Travel Journey</span>
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <!-- 👇 REPLACE THIS IMAGE URL WITH YOUR PHOTO -->
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d" 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNcCJu1MjQzi3uboCHl6paqm11ovsnAURnMaxwclG1ovDHRTf1FU8N6NqnUKZq4XFS1HUoZJUVchEre3tRGkK3yCRunipu8A-DGVmQiBEgVQmwXTo9RwmU9IDC3dnyqlrCPLGk8TWjs9FCnaxEUGgvNrg=w602-h602-s-no-gm?authuser=0" 
                          alt="Car Service Photo 3" 
                          class="rounded-xl shadow-2xl w-full h-[400px] object-cover">
                     <p class="text-sm text-gray-600 mt-2 text-center">
-                        👆 Replace image URL above (line 140)
+                        Fast and Safe
                     </p>
                 </div>
                 <div>
-                    <!-- 👇 EDIT THIS TITLE -->
                     <h2 class="text-3xl font-bold text-gray-900 mb-4">Airport Transfer Service</h2>
-                    
-                    <!-- 👇 EDIT THIS DESCRIPTION -->
                     <p class="text-gray-700 text-lg mb-4">
-                        Add your description here. Describe your airport transfer service, 
-                        reliability, on-time guarantee, luggage handling, etc.
+                        I provide a dependable airport transfer service focused on punctuality, safety, and comfort. Whether you are heading to the airport or arriving from a flight, I ensure timely pickup and drop off so you never feel rushed or stressed. I monitor schedules closely, plan routes ahead of time, and assist with luggage to make your journey smooth and hassle free. This service is ideal for travelers who value reliability and a calm start or end to their trip.
                     </p>
-                    
-                    <!-- 👇 EDIT THESE BULLET POINTS -->
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 1</span>
+                            <span class="text-gray-700">On time pickup and drop off with careful route planning</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 2</span>
+                            <span class="text-gray-700">Assistance with luggage and courteous, professional service</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <span class="text-green-600 text-xl">✓</span>
-                            <span class="text-gray-700">Edit this feature point 3</span>
+                            <span class="text-gray-700">Safe, clean, and comfortable vehicle suitable for travel needs</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== PHOTO GALLERY SECTION ==================== -->
+        <!-- ==================== PHOTO GALLERY SECTION WITH SEARCH ==================== -->
         <div class="edit-section mb-12">
-            <span class="edit-label">📸 PHOTO GALLERY - Add More Photos Here</span>
-            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Our Fleet Gallery</h2>
+            <span class="edit-label">📸 PHOTO GALLERY WITH SEARCH</span>
+            <h2 class="text-3xl font-bold text-gray-900 mb-4 text-center">Our Clients and their Testimonies</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- 👇 PHOTO 1 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" 
-                         alt="Gallery Photo 1" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 1 (line 186)</p>
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto mb-8">
+                <div class="relative">
+                    <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search client name or location..." 
+                        class="w-full pl-12 pr-4 py-4 border-2 border-blue-300 rounded-lg text-lg focus:border-blue-600 focus:outline-none"
+                        onkeyup="filterGallery()">
+                </div>
+                <p class="text-sm text-gray-600 mt-2 text-center">Type client name or location to filter results</p>
+            </div>
+            
+            <div id="gallery" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- 
+                ============================================================
+                👇 PHOTO 1 - Mrs. Lovely L Ramirez-Budol
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Mrs. Lovely L Ramirez-Budol" 
+                     data-location="Manila"
+                     onclick="window.open('https://www.facebook.com/share/p/1ED4rg3vPN/', '_blank')">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP1M9n37hdKHm7YVk2fJbJ4ftpiKzLwO9fqbGUJf_1hxQkUvZOWLD2kn0r9xfymvza4xwz5x-GaSxPE0LwsdKmWqfPOw8eVrGVtOaLRLLY8zahpTQxjCweK-bW2ba1D2VqN9iJMBYCINj1zi_UJ1p3oeA=w803-h602-s-no-gm?authuser=0" 
+                         alt="Mrs. Lovely L Ramirez-Budol" 
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Mrs. Lovely L Ramirez-Budol</p>
+                        <p class="text-gray-300 text-sm">📍 Manila</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 2 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8" 
-                         alt="Gallery Photo 2" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 2 (line 194)</p>
+                <!-- 
+                ============================================================
+                👇 PHOTO 2 - ADD YOUR CLIENT HERE
+                Edit: data-project, data-location, onclick link, image src
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Client Name 2" 
+                     data-location="Quezon City"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_2', '_blank')">
+                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d" 
+                         alt="Client 2" 
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Client Name 2</p>
+                        <p class="text-gray-300 text-sm">📍 Quezon City</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 3 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" 
-                         alt="Gallery Photo 3" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 3 (line 202)</p>
+                <!-- 
+                ============================================================
+                👇 PHOTO 3 - ADD YOUR CLIENT HERE
+                ============================================================
+                -->
+                <div class="gallery-item relative group" 
+                     data-project="Client Name 3" 
+                     data-location="Makati"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_ALBUM_LINK_3', '_blank')">
+                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7" 
+                         alt="Client 3" 
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Client Name 3</p>
+                        <p class="text-gray-300 text-sm">📍 Makati</p>
+                    </div>
                 </div>
 
-                <!-- 👇 PHOTO 4 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1" 
-                         alt="Gallery Photo 4" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 4 (line 210)</p>
+                <!-- 
+                ============================================================
+                👇 ADD MORE PHOTOS HERE - Copy & paste this template:
+                ============================================================
+                
+                <div class="gallery-item relative group" 
+                     data-project="Your Client Name" 
+                     data-location="Your Location"
+                     onclick="window.open('https://photos.app.goo.gl/YOUR_LINK', '_blank')">
+                    <img src="YOUR_IMAGE_URL" 
+                         alt="Client Name" 
+                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-all">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 rounded-b-lg">
+                        <p class="text-white font-semibold">Your Client Name</p>
+                        <p class="text-gray-300 text-sm">📍 Your Location</p>
+                    </div>
                 </div>
+                
+                ============================================================
+                -->
 
-                <!-- 👇 PHOTO 5 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1485463611174-f302f6a5c1c9" 
-                         alt="Gallery Photo 5" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 5 (line 218)</p>
-                </div>
+            </div>
 
-                <!-- 👇 PHOTO 6 - REPLACE URL -->
-                <div class="relative group">
-                    <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c" 
-                         alt="Gallery Photo 6" 
-                         class="rounded-lg w-full h-64 object-cover shadow-lg group-hover:shadow-2xl transition-shadow">
-                    <p class="text-xs text-gray-600 mt-2">👆 Photo 6 (line 226)</p>
-                </div>
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-12">
+                <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-xl text-gray-600">No clients found matching your search</p>
+                <button onclick="clearSearch()" class="mt-4 text-blue-600 hover:text-blue-700 font-semibold">
+                    Clear Search
+                </button>
             </div>
         </div>
 
@@ -267,5 +345,38 @@
             <a href="index.html" class="text-blue-400 hover:text-blue-300">← Back to Home</a>
         </div>
     </footer>
+
+    <!-- Search & Filter Script -->
+    <script>
+        function filterGallery() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            galleryItems.forEach(item => {
+                const project = item.getAttribute('data-project').toLowerCase();
+                const location = item.getAttribute('data-location').toLowerCase();
+                
+                if (project.includes(searchInput) || location.includes(searchInput)) {
+                    item.classList.remove('hidden-item');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden-item');
+                }
+            });
+
+            if (visibleCount === 0 && searchInput !== '') {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            filterGallery();
+        }
+    </script>
 </body>
 </html>
